@@ -19,10 +19,14 @@
 	<properties>
 		<!-- Spring -->
 		<spring-framework.version>4.2.0.RELEASE</spring-framework.version>
+		<!-- Spring-cassandra -->
+		<spring-framework.cassandra.version>1.2.2.RELEASE</spring-framework.cassandra.version>
 		<!-- Slf4j -->
 		<slf4j.version>1.7.12</slf4j.version>
 		<!-- Storm -->
 		<storm.version>0.10.0-beta1</storm.version>
+		<!-- Storm-Cassandra -->
+		<storm.cassandra.version>0.3.3-SNAPSHOT</storm.cassandra.version>
 	</properties>
 
 	<dependencies>
@@ -34,10 +38,12 @@
 			<version>${spring-framework.version}</version>
 			<scope>compile</scope>
 		</dependency>
+		
+		<!-- Spring-cassandra -->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-			<version>${spring-framework.version}</version>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-cassandra</artifactId>
+			<version>${spring-framework.cassandra.version}</version>
 		</dependency>
 		
 
@@ -48,6 +54,13 @@
 			<version>${storm.version}</version>
 			<!-- keep storm out of the jar-with-dependencies -->
 			<scope>provided</scope>
+		</dependency>
+		
+		<!-- Storm-cassandra -->
+		<dependency>
+			<groupId>com.hmsonline</groupId>
+			<artifactId>storm-cassandra-cql</artifactId>
+			<version>${storm.cassandra.version}</version>
 		</dependency>
 
 		<!-- SLF4J -->
