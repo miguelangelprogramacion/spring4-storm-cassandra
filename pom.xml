@@ -19,10 +19,11 @@
 	<properties>
 		<!-- Spring -->
 		<spring-framework.version>4.2.0.RELEASE</spring-framework.version>
+		<!-- Slf4j -->
 		<slf4j.version>1.7.12</slf4j.version>
+		<!-- Storm -->
+		<storm.version>0.10.0-beta1</storm.version>
 	</properties>
-
-
 
 	<dependencies>
 
@@ -34,12 +35,21 @@
 			<scope>compile</scope>
 		</dependency>
 
+		<!-- STORM -->
+		<dependency>
+			<groupId>org.apache.storm</groupId>
+			<artifactId>storm-core</artifactId>
+			<version>${storm.version}</version>
+			<!-- keep storm out of the jar-with-dependencies -->
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- SLF4J -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j.version}</version>
-		</dependency>		
+		</dependency>
 		<!-- Binding for System.out -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
