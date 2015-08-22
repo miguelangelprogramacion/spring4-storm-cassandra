@@ -10,6 +10,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.cassandra.core.CassandraOperations;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +21,7 @@ import com.datastax.driver.core.ConsistencyLevel;
 import com.datastax.driver.core.Statement;
 
 import storm.trident.state.State;
+import world.we.deserve.CassandraComponentScan;
 
 /**
  * @author Miguel Ángel Dev (miguelangelprogramacion@gmail.com)
@@ -41,7 +44,7 @@ public class CassandraCqlState  implements State, Serializable {
 	@Autowired
 	public CassandraCqlState(CassandraOperations cassandraOperations) {
 		super();
-		this.cassandraOperations = cassandraOperations;
+//		this.cassandraOperations = cassandraOperations;
 		
 //		Insert insert = QueryBuilder.insertInto("usuario");
 //		insert.setConsistencyLevel(ConsistencyLevel.ONE);
@@ -56,6 +59,11 @@ public class CassandraCqlState  implements State, Serializable {
     
     @Override
     public void beginCommit(Long txid) {
+    	if(cassandraOperations==null)
+    	{	ApplicationContext context = new AnnotationConfigApplicationContext(CassandraComponentScan.class);
+    		DAO dao = context.getBean(DAO.class);
+    		this.cassandraOperations = dao.getCassandraOperations();
+    	}
     }
 
     @Override

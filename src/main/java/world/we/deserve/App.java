@@ -54,7 +54,7 @@ public class App {
 	private static final Logger LOG = LoggerFactory.getLogger(App.class);
 
 	public static void main(String[] args) {
-		ApplicationContext context = new AnnotationConfigApplicationContext(StormCassandraComponentScan.class);
+		ApplicationContext context = new AnnotationConfigApplicationContext(TopologyComponentScan.class);
 		App app = context.getBean(App.class);
 
 		String host = null;

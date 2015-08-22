@@ -26,8 +26,7 @@ import storm.trident.TridentTopology;
  */
 @Configuration
 @ComponentScan(basePackages = { "world.we.deserve" })
-@EnableCassandraRepositories(basePackages = { "world.we.deserve.dao" })
-public class StormCassandraComponentScan {
+public class TopologyComponentScan {
 
 	/**************************************************************
 	**************************************************************
@@ -66,49 +65,4 @@ public class StormCassandraComponentScan {
 
 		return tridentConfig;
 	}
-	
-	/**************************************************************
-	**************************************************************
-						Cassandra - Config
-	**************************************************************
-	**************************************************************/
-	
-	 @Bean
-	  public CassandraClusterFactoryBean clusterCassandra() {
-
-	    CassandraClusterFactoryBean cluster = new CassandraClusterFactoryBean();
-	    cluster.setContactPoints("localhost");
-	    cluster.setPort(9042);
-
-	    return cluster;
-	  }
-
-	  @Bean
-	  public CassandraMappingContext mappingContext() {
-	    return new BasicCassandraMappingContext();
-	  }
-
-	  @Bean
-	  public CassandraConverter converter() {
-	    return new MappingCassandraConverter(mappingContext());
-	  }
-
-	  @Bean
-	  public CassandraSessionFactoryBean session() throws Exception {
-
-	    CassandraSessionFactoryBean session = new CassandraSessionFactoryBean();
-	    //TODO: DI?
-	    session.setCluster(clusterCassandra().getObject());
-	    session.setKeyspaceName("demo");
-	    session.setConverter(converter());
-	    session.setSchemaAction(SchemaAction.NONE);
-
-	    return session;
-	  }
-
-	  @Bean
-	  public CassandraOperations cassandraTemplate() throws Exception {
-	    return new CassandraTemplate(session().getObject());
-	  }
-
 }
