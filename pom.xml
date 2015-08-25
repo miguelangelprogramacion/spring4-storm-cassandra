@@ -44,8 +44,7 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-cassandra</artifactId>
 			<version>${spring-framework.cassandra.version}</version>
-		</dependency>
-		
+		</dependency>		
 
 		<!-- STORM -->
 		<dependency>
